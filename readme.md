@@ -22,3 +22,9 @@ pip install .
 ```sh
 python <day #>
 ```
+
+## Testing
+
+```sh
+pytest <day #>
+```
