@@ -10,9 +10,9 @@ def main():
         .strip()
         .split("\n")
     )
-    print("Calibration Numbers")
-    print("Part 1 - ", solve_pt_1(input))
-    print("Part 2 - ", solve_pt_2(input))
+    print("Calibration Numbers:")
+    print("Part 1 -", solve_pt_1(input))
+    print("Part 2 -", solve_pt_2(input))
 
 
 if __name__ == "__main__":
