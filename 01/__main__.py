@@ -1,5 +1,6 @@
-from puzzle import solve_pt_1, solve_pt_2
 from pathlib import Path
+
+from puzzle import solve_pt_1, solve_pt_2
 
 
 def main():

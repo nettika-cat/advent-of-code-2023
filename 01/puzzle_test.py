@@ -1,9 +1,5 @@
-from puzzle import (
-    pt_1_first_digit_pattern,
-    pt_1_last_digit_pattern,
-    solve_pt_1,
-    solve_pt_2,
-)
+from puzzle import (pt_1_first_digit_pattern, pt_1_last_digit_pattern,
+                    solve_pt_1, solve_pt_2)
 
 
 def test_solve_pt_1():

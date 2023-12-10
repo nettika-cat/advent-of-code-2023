@@ -1,5 +1,5 @@
 from game import Game
-from puzzle import solve_pt_1, solve_pt_2, _configuration_power
+from puzzle import _configuration_power, solve_pt_1, solve_pt_2
 
 mock_input = [
     "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green",

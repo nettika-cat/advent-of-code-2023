@@ -1,6 +1,7 @@
 from __future__ import annotations
-from dataclasses import dataclass
+
 import re
+from dataclasses import dataclass
 
 game_id_pattern = re.compile(r"^Game (\d+)$")
 draw_yield_description_pattern = re.compile(r"(\d+) (\w+)")
