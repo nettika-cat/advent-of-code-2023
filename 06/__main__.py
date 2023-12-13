@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from puzzle import Race, solve
 
 
