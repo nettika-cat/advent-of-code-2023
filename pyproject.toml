@@ -8,7 +8,7 @@ version = "0.1.0"
 dependencies = ["requests"]
 
 [project.optional-dependencies]
-test = ["pytest", "types-requests"]
+test = ["pytest", "pytest-cov", "types-requests"]
 
 [project.scripts]
 advent-of-code-2023 = "advent_of_code.__main__:main"
