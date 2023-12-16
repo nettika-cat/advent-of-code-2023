@@ -1,7 +1,14 @@
 [build-system]
 requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
 
 [project]
-name = "advent-of-code"
+name = "advent_of_code"
 version = "0.1.0"
-dependencies = ["pytest"]
+dependencies = ["requests"]
+
+[project.optional-dependencies]
+test = ["pytest", "types-requests"]
+
+[project.scripts]
+advent-of-code-2023 = "advent_of_code.__main__:main"
