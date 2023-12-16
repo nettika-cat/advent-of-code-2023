@@ -12,3 +12,6 @@ test = ["pytest", "types-requests"]
 
 [project.scripts]
 advent-of-code-2023 = "advent_of_code.__main__:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

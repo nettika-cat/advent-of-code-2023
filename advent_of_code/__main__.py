@@ -3,10 +3,7 @@ from argparse import ArgumentParser
 
 import requests
 
-from advent_of_code import __version__
-from advent_of_code.solver import Solver
-
-solvers: dict[int, Solver] = {}
+from advent_of_code import __version__, solvers
 
 
 def main():
@@ -57,10 +54,10 @@ def main():
     # Execute solvers
     print(f"Solving day {args.day}'s puzzle")
     start = time.time()
-    print("Part 1 -", solver.solve_part_1(input))
-    print("Part 2 -", solver.solve_part_2(input))
+    print("Part 1 -", solver[0](input))
+    print("Part 2 -", solver[1](input))
     end = time.time()
-    print(f"Solved in {end-start:,} seconds.")
+    print(f"Solved in {end-start:,.4f} seconds.")
 
 
 if __name__ == "__main__":
