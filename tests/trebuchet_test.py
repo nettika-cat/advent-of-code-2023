@@ -1,9 +1,12 @@
 import re
+
+import pytest
+
 from advent_of_code.trebuchet import (
-    recover_calibration_digits_and_words,
-    recover_calibration_digits_only,
     _recover_all_calibration_values,
     _recover_calibration_value,
+    solve_part_1,
+    solve_part_2,
 )
 
 
@@ -18,6 +21,14 @@ def test_recover_calibration_value():
         == 12
     )
 
+    with pytest.raises(ValueError):
+        _recover_calibration_value(
+            ".",
+            re.compile("ab"),
+            re.compile("ba"),
+            {},
+        )
+
 
 def test_recover_all_calibration_values():
     assert (
@@ -31,9 +42,9 @@ def test_recover_all_calibration_values():
     )
 
 
-def test_recover_calibration_digits_only():
+def test_solve_part_1():
     assert (
-        recover_calibration_digits_only(
+        solve_part_1(
             "\n".join(
                 [
                     "1abc2",
@@ -47,9 +58,9 @@ def test_recover_calibration_digits_only():
     )
 
 
-def test_recover_calibration_digits_and_words():
+def test_solve_part_2():
     assert (
-        recover_calibration_digits_and_words(
+        solve_part_2(
             "\n".join(
                 [
                     "two1nine",

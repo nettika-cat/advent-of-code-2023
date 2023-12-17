@@ -1,5 +1,6 @@
-import re
+"Day 1: Trebuchet?!"
 
+import re
 
 number_word_map = {
     "one": "1",
@@ -61,7 +62,7 @@ def _recover_all_calibration_values(
     )
 
 
-def recover_calibration_digits_only(input: str) -> str:
+def solve_part_1(input: str) -> str:
     return str(
         _recover_all_calibration_values(
             input,
@@ -72,7 +73,7 @@ def recover_calibration_digits_only(input: str) -> str:
     )
 
 
-def recover_calibration_digits_and_words(input: str) -> str:
+def solve_part_2(input: str) -> str:
     return str(
         _recover_all_calibration_values(
             input,
