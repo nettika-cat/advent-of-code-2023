@@ -90,13 +90,12 @@ class Schematic:
         return results
 
 
-def solve_part_1(input: str) -> str:
+def solve_part_1(input: str) -> int:
     schematic = Schematic.parse(input)
-    total = sum(int(part_number.number) for part_number, _ in schematic.part_numbers())
-    return str(total)
+    return sum(int(part_number.number) for part_number, _ in schematic.part_numbers())
 
 
-def solve_part_2(input: str) -> str:
+def solve_part_2(input: str) -> int:
     schematic = Schematic.parse(input)
     part_groups: dict[SchematicSymbol, list[SchematicNumber]] = {}
     for part_number, part_symbol in schematic.part_numbers():
@@ -109,9 +108,4 @@ def solve_part_2(input: str) -> str:
         part_numbers for part_numbers in part_groups.values() if len(part_numbers) == 2
     ]
 
-    total = 0
-    for gear_1, gear_2 in gears:
-        gear_ratio = int(gear_1.number) * int(gear_2.number)
-        total += gear_ratio
-
-    return str(total)
+    return sum(int(gear_1.number) * int(gear_2.number) for gear_1, gear_2 in gears)

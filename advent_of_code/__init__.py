@@ -7,7 +7,7 @@ from typing import Callable
 
 from advent_of_code import cubes, trebuchet, gears
 
-Solver = Callable[[str], str]
+Solver = Callable[[str], int]
 
 
 solvers: dict[int, tuple[Solver, Solver]] = {

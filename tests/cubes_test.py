@@ -107,15 +107,8 @@ mock_input = "\n".join(
 
 
 def test_solve_pt_1():
-    assert solve_part_1(mock_input) == "8"
+    assert solve_part_1(mock_input) == 8
 
 
 def test_solve_pt_2():
-    assert solve_part_2(mock_input) == "2286"
-
-
-# def test_configuration_power():
-#     assert [
-#         _configuration_power(Game.parse(game_desc).minimum_configuration())
-#         for game_desc in mock_input
-#     ] == [48, 12, 1560, 630, 36]
+    assert solve_part_2(mock_input) == 2286

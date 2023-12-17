@@ -91,8 +91,8 @@ def test_schematic_part_numbers():
 
 
 def test_solve_part_1():
-    assert solve_part_1(mock_input) == "4361"
+    assert solve_part_1(mock_input) == 4361
 
 
 def test_solve_part_2():
-    assert solve_part_2(mock_input) == "467835"
+    assert solve_part_2(mock_input) == 467835

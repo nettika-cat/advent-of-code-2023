@@ -77,18 +77,14 @@ class Game:
         return config
 
 
-def solve_part_1(input: str) -> str:
+def solve_part_1(input: str) -> int:
     actual_bag = Configuration(red=12, green=13, blue=14)
-    return str(
-        sum(
-            game.id
-            for game in Game.parse_table(input)
-            if game.meets_configuration(actual_bag)
-        )
+    return sum(
+        game.id
+        for game in Game.parse_table(input)
+        if game.meets_configuration(actual_bag)
     )
 
 
-def solve_part_2(input: str) -> str:
-    return str(
-        sum(game.minimum_configuration().power() for game in Game.parse_table(input))
-    )
+def solve_part_2(input: str) -> int:
+    return sum(game.minimum_configuration().power() for game in Game.parse_table(input))

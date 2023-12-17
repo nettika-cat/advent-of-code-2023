@@ -62,23 +62,19 @@ def _recover_all_calibration_values(
     )
 
 
-def solve_part_1(input: str) -> str:
-    return str(
-        _recover_all_calibration_values(
-            input,
-            decimal_only_pattern,
-            decimal_only_pattern,
-            {},
-        )
+def solve_part_1(input: str) -> int:
+    return _recover_all_calibration_values(
+        input,
+        decimal_only_pattern,
+        decimal_only_pattern,
+        {},
     )
 
 
-def solve_part_2(input: str) -> str:
-    return str(
-        _recover_all_calibration_values(
-            input,
-            left_decimal_and_words_pattern,
-            right_decimal_and_words_pattern,
-            number_word_map,
-        )
+def solve_part_2(input: str) -> int:
+    return _recover_all_calibration_values(
+        input,
+        left_decimal_and_words_pattern,
+        right_decimal_and_words_pattern,
+        number_word_map,
     )
