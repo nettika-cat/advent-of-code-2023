@@ -1,45 +1,54 @@
 "Day 3: Gear Ratios"
 
 from __future__ import annotations
+from collections import UserDict
 
 from dataclasses import dataclass
+from functools import reduce
+import math
 from typing import NamedTuple
 
 
-class SchematicNumber(NamedTuple):
-    number: str
+class Symbol(NamedTuple):
+    value: str
     row: int
     col: int
 
-    def extend_digit(self, digit: str) -> SchematicNumber:
-        return SchematicNumber(self.number + digit, self.row, self.col)
 
-
-class SchematicSymbol(NamedTuple):
-    symbol: str
+class Number(NamedTuple):
+    value: str
     row: int
     col: int
+    anchor: Symbol | None = None
+
+    def extend_digit(self, digit: str) -> Number:
+        return self._replace(value=self.value + digit)
+
+
+class Part(NamedTuple):
+    number: Number
+    symbol: Symbol
 
 
 @dataclass
 class Schematic:
-    numbers: list[SchematicNumber]
-    symbols: list[SchematicSymbol]
+    numbers: list[Number]
+    symbols: list[Symbol]
 
     @classmethod
     def parse(cls, input: str) -> Schematic:
         row = 0
         col = 0
-        current_number: SchematicNumber | None = None
-        numbers: list[SchematicNumber] = []
-        symbols: list[SchematicSymbol] = []
+        current_number: Number | None = None
+        numbers: list[Number] = []
+        symbols: list[Symbol] = []
 
         for char in input:
             match char:
                 # Digit
                 case n if n in "0123456789":
                     if not current_number:
-                        current_number = SchematicNumber("", row, col)
+                        current_number = Number("", row, col)
                     current_number = current_number.extend_digit(char)
                     col += 1
 
@@ -63,7 +72,7 @@ class Schematic:
                     if current_number:
                         numbers.append(current_number)
                         current_number = None
-                    symbols.append(SchematicSymbol(char, row, col))
+                    symbols.append(Symbol(char, row, col))
                     col += 1
 
         # Finalize a number at the end of the schematic
@@ -72,40 +81,42 @@ class Schematic:
 
         return cls(numbers, symbols)
 
-    def part_numbers(self) -> list[tuple[SchematicNumber, SchematicSymbol]]:
-        results = []
+    def parts(self) -> set[Part]:
+        return {
+            Part(number, symbol)
+            for number in self.numbers
+            for symbol in self.symbols
+            if (
+                # Symbol within 1 row
+                (number.row - 1 <= symbol.row <= number.row + 1)
+                and
+                # Symbol within 1 column
+                (number.col - 1 <= symbol.col <= number.col + len(number.value))
+            )
+        }
 
-        for number in self.numbers:
-            for symbol in self.symbols:
-                if (
-                    # Symbol within 1 row
-                    (number.row - 1 <= symbol.row <= number.row + 1)
-                    and
-                    # Symbol within 1 column
-                    (number.col - 1 <= symbol.col <= number.col + len(number.number))
-                ):
-                    results.append((number, symbol))
-                    break
-
-        return results
+    def part_groups(self) -> dict[Symbol, set[Part]]:
+        groups: dict[Symbol, set[Part]] = {}
+        for part in self.parts():
+            if part.symbol not in groups:
+                groups[part.symbol] = set()
+            groups[part.symbol].add(part)
+        return groups
 
 
 def solve_part_1(input: str) -> int:
     schematic = Schematic.parse(input)
-    return sum(int(part_number.number) for part_number, _ in schematic.part_numbers())
+    return sum(int(part.number.value) for part in schematic.parts())
 
 
 def solve_part_2(input: str) -> int:
     schematic = Schematic.parse(input)
-    part_groups: dict[SchematicSymbol, list[SchematicNumber]] = {}
-    for part_number, part_symbol in schematic.part_numbers():
-        if part_symbol.symbol != "*":
-            continue
-        if part_symbol not in part_groups:
-            part_groups[part_symbol] = []
-        part_groups[part_symbol].append(part_number)
-    gears = [
-        part_numbers for part_numbers in part_groups.values() if len(part_numbers) == 2
-    ]
-
-    return sum(int(gear_1.number) * int(gear_2.number) for gear_1, gear_2 in gears)
+    return sum(
+        reduce(
+            lambda x, y: x * y,
+            (int(part.number.value) for part in parts),
+        )
+        for symbol, parts in schematic.part_groups().items()
+        if symbol.value == "*"
+        if len(parts) == 2
+    )

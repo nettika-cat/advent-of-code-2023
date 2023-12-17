@@ -1,7 +1,8 @@
 from advent_of_code.gears import (
+    Part,
     Schematic,
-    SchematicNumber,
-    SchematicSymbol,
+    Number,
+    Symbol,
     solve_part_1,
     solve_part_2,
 )
@@ -21,73 +22,73 @@ mock_input = """
 
 
 def test_schematic_number_extend_digit():
-    assert SchematicNumber("", 1, 2).extend_digit("3") == SchematicNumber("3", 1, 2)
-    assert (
-        SchematicNumber("5", 3, 5).extend_digit("0").extend_digit("4")
-    ) == SchematicNumber("504", 3, 5)
+    assert Number("", 1, 2).extend_digit("3") == Number("3", 1, 2)
+    assert (Number("5", 3, 5).extend_digit("0").extend_digit("4")) == Number(
+        "504", 3, 5
+    )
 
 
 def test_parse_schematic():
     assert Schematic.parse(mock_input) == Schematic(
         [
-            SchematicNumber("467", 0, 0),
-            SchematicNumber("114", 0, 5),
-            SchematicNumber("35", 2, 2),
-            SchematicNumber("633", 2, 6),
-            SchematicNumber("617", 4, 0),
-            SchematicNumber("58", 5, 8),
-            SchematicNumber("592", 6, 2),
-            SchematicNumber("755", 7, 6),
-            SchematicNumber("664", 9, 1),
-            SchematicNumber("598", 9, 5),
-            SchematicNumber("3", 9, 9),
+            Number("467", 0, 0),
+            Number("114", 0, 5),
+            Number("35", 2, 2),
+            Number("633", 2, 6),
+            Number("617", 4, 0),
+            Number("58", 5, 8),
+            Number("592", 6, 2),
+            Number("755", 7, 6),
+            Number("664", 9, 1),
+            Number("598", 9, 5),
+            Number("3", 9, 9),
         ],
         [
-            SchematicSymbol("*", 1, 3),
-            SchematicSymbol("#", 3, 6),
-            SchematicSymbol("*", 4, 3),
-            SchematicSymbol("+", 5, 5),
-            SchematicSymbol("$", 8, 3),
-            SchematicSymbol("*", 8, 5),
+            Symbol("*", 1, 3),
+            Symbol("#", 3, 6),
+            Symbol("*", 4, 3),
+            Symbol("+", 5, 5),
+            Symbol("$", 8, 3),
+            Symbol("*", 8, 5),
         ],
     )
 
 
 def test_schematic_part_numbers():
-    assert Schematic.parse(mock_input).part_numbers() == [
-        (
-            SchematicNumber("467", 0, 0),
-            SchematicSymbol("*", 1, 3),
+    assert Schematic.parse(mock_input).parts() == {
+        Part(
+            Number("467", 0, 0),
+            Symbol("*", 1, 3),
         ),
-        (
-            SchematicNumber("35", 2, 2),
-            SchematicSymbol("*", 1, 3),
+        Part(
+            Number("35", 2, 2),
+            Symbol("*", 1, 3),
         ),
-        (
-            SchematicNumber("633", 2, 6),
-            SchematicSymbol("#", 3, 6),
+        Part(
+            Number("633", 2, 6),
+            Symbol("#", 3, 6),
         ),
-        (
-            SchematicNumber("617", 4, 0),
-            SchematicSymbol("*", 4, 3),
+        Part(
+            Number("617", 4, 0),
+            Symbol("*", 4, 3),
         ),
-        (
-            SchematicNumber("592", 6, 2),
-            SchematicSymbol("+", 5, 5),
+        Part(
+            Number("592", 6, 2),
+            Symbol("+", 5, 5),
         ),
-        (
-            SchematicNumber("755", 7, 6),
-            SchematicSymbol("*", 8, 5),
+        Part(
+            Number("755", 7, 6),
+            Symbol("*", 8, 5),
         ),
-        (
-            SchematicNumber("664", 9, 1),
-            SchematicSymbol("$", 8, 3),
+        Part(
+            Number("664", 9, 1),
+            Symbol("$", 8, 3),
         ),
-        (
-            SchematicNumber("598", 9, 5),
-            SchematicSymbol("*", 8, 5),
+        Part(
+            Number("598", 9, 5),
+            Symbol("*", 8, 5),
         ),
-    ]
+    }
 
 
 def test_solve_part_1():
