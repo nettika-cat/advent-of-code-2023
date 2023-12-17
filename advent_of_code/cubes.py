@@ -1,3 +1,5 @@
+"Day 2: Cube Conundrum"
+
 from __future__ import annotations
 
 import re

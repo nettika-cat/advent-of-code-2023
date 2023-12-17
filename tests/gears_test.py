@@ -1,4 +1,10 @@
-from schematic import Schematic, SchematicNumber, SchematicSymbol
+from advent_of_code.gears import (
+    Schematic,
+    SchematicNumber,
+    SchematicSymbol,
+    solve_part_1,
+    solve_part_2,
+)
 
 mock_input = """
 467..114..
@@ -6,23 +12,19 @@ mock_input = """
 ..35..633.
 ......#...
 617*......
-.....+.58.
+.....+..58
 ..592.....
 ......755.
 ...$.*....
-.664.598..
+.664.598.3
 """.strip()
 
 
 def test_schematic_number_extend_digit():
-    sn = SchematicNumber("", 1, 2)
-    assert sn.number == ""
-    sn = sn.extend_digit("3")
-    assert sn.number == "3"
-    sn = sn.extend_digit("5")
-    assert sn.number == "35"
-    sn = sn.extend_digit("1")
-    assert sn.number == "351"
+    assert SchematicNumber("", 1, 2).extend_digit("3") == SchematicNumber("3", 1, 2)
+    assert (
+        SchematicNumber("5", 3, 5).extend_digit("0").extend_digit("4")
+    ) == SchematicNumber("504", 3, 5)
 
 
 def test_parse_schematic():
@@ -33,11 +35,12 @@ def test_parse_schematic():
             SchematicNumber("35", 2, 2),
             SchematicNumber("633", 2, 6),
             SchematicNumber("617", 4, 0),
-            SchematicNumber("58", 5, 7),
+            SchematicNumber("58", 5, 8),
             SchematicNumber("592", 6, 2),
             SchematicNumber("755", 7, 6),
             SchematicNumber("664", 9, 1),
             SchematicNumber("598", 9, 5),
+            SchematicNumber("3", 9, 9),
         ],
         [
             SchematicSymbol("*", 1, 3),
@@ -85,3 +88,11 @@ def test_schematic_part_numbers():
             SchematicSymbol("*", 8, 5),
         ),
     ]
+
+
+def test_solve_part_1():
+    assert solve_part_1(mock_input) == "4361"
+
+
+def test_solve_part_2():
+    assert solve_part_2(mock_input) == "467835"
