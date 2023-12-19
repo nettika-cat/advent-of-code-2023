@@ -1,11 +1,11 @@
 "Day 3: Gear Ratios"
 
 from __future__ import annotations
-from collections import UserDict
 
+import math
+from collections import UserDict
 from dataclasses import dataclass
 from functools import reduce
-import math
 from typing import NamedTuple
 
 

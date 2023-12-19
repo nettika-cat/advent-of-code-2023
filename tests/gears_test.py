@@ -1,7 +1,7 @@
 from advent_of_code.gears import (
+    Number,
     Part,
     Schematic,
-    Number,
     Symbol,
     solve_part_1,
     solve_part_2,

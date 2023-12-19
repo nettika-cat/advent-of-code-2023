@@ -1,5 +1,10 @@
-from puzzle import (RangeConversion, resolve_destination, resolve_source,
-                    solve_pt_1, solve_pt_2)
+from puzzle import (
+    RangeConversion,
+    resolve_destination,
+    resolve_source,
+    solve_pt_1,
+    solve_pt_2,
+)
 
 mock_seeds = [79, 14, 55, 13]
 mock_destinations = [81, 14, 57, 13]
