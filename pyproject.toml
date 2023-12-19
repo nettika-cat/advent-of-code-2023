@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "advent_of_code"
 version = "0.1.0"
-dependencies = ["requests"]
+dependencies = ["requests", "frozendict"]
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-cov", "types-requests"]

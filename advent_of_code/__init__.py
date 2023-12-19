@@ -5,7 +5,7 @@ __version__ = "1.0.0"
 
 from typing import Callable
 
-from advent_of_code import cubes, gears, scratchcards, trebuchet
+from advent_of_code import cubes, gears, network, scratchcards, trebuchet
 
 Solver = Callable[[str], int]
 
@@ -15,4 +15,5 @@ solvers: dict[int, tuple[Solver, Solver]] = {
     2: (cubes.solve_part_1, cubes.solve_part_2),
     3: (gears.solve_part_1, gears.solve_part_2),
     4: (scratchcards.solve_part_1, scratchcards.solve_part_2),
+    8: (network.solve_part_1, network.solve_part_2),
 }
